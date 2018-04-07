@@ -1,22 +1,3 @@
-class Note {
-    constructor(text, date) {
-        this._text = text;
-        this._date = date;
-    }
-
-    get text() {
-        return this._text;
-    }
-
-    get date() {
-        return this._date;
-    }
-
-    equals(note) {
-        return this.text === note.text && this.date === note.date;
-    }
-}
-
 function load_notes() {
     if (localStorage.notes === undefined ) return;
     JSON.parse(localStorage.notes).forEach(show_note);
@@ -25,15 +6,8 @@ function load_notes() {
 function add_note(note) {
     var notes = localStorage.notes ? JSON.parse(localStorage.notes).map(n => new Note(n.text, n.date)) : [];
     notes.push(note);
-    localStorage.notes = JSON.stringify(notes.map(n => { return {text: n.text, date: n.date}; }));
+    localStorage.notes = JSON.stringify(notes.map(n => n.toJson()));
     show_note(note);
-}
-
-function createNote() {
-    return new Note(
-        document.getElementById('note_input').value,
-        document.getElementById('date_input').value
-    );
 }
 
 function show_note(note) {
@@ -63,9 +37,11 @@ function remove_note(note_to_remove) {
 }
 
 load_notes();
+
 document.querySelector('form').addEventListener('submit', e => {
     e.preventDefault();
-    const note = createNote();
-    if (note.text === '' || note.date === '') return;
-    add_note(note);
+    const {text, date} = retrieveInput();
+    if (!(text === '' || date === '')) {
+        add_note(new Note(text, date));
+    }
 });

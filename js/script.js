@@ -3,12 +3,6 @@ function load_notes() {
     JSON.parse(localStorage.notes).forEach(show_note);
 }
 
-function on_submit() {
-    var note = new_note();
-    if (note.text === '' || note.date === '') return;
-    add_note(note);
-}
-
 function add_note(note) {
     var notes = localStorage.notes === undefined ? [] : JSON.parse(localStorage.notes);
     notes.push(note);
@@ -16,7 +10,7 @@ function add_note(note) {
     show_note(note);
 }
 
-function new_note() {
+function createNote() {
     return {
         'text': document.getElementById('note_input').value,
         'date': document.getElementById('date_input').value
@@ -54,3 +48,9 @@ function notes_are_equals(note1, note2) {
 }
 
 load_notes();
+document.querySelector('form').addEventListener('submit', e => {
+    e.preventDefault();
+    const note = createNote();
+    if (note.text === '' || note.date === '') return;
+    add_note(note);
+});

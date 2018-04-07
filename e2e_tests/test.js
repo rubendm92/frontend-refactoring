@@ -1,11 +1,11 @@
 const serve = require('serve');
 const browser = require('./Browser');
 const NoteBook = require('./NoteBook');
+const port = 8000;
+const _ = f => browser(`http://localhost:${port}`)(page => f(new NoteBook(page)));
+let server;
 
 describe('Notes', function() {
-    const port = 8000;
-    const _ = f => browser(`http://localhost:${port}`)(page => f(new NoteBook(page)));
-    let server;
 
     before(done => {
         server = serve('.', { port });
@@ -31,6 +31,19 @@ describe('Notes', function() {
         await noteBook.publishNote('Bye', '2092-06-22');
 
         await noteBook.noteExists('Hello 1992-06-22');
+        await noteBook.noteExists('Bye 2092-06-22');
+    }));
+
+    it('can delete notes', _(async noteBook => {
+        await noteBook.publishNote('Hello', '1992-06-22');
+        await noteBook.publishNote('Bye', '2092-06-22');
+
+        await noteBook.noteExists('Hello 1992-06-22');
+        await noteBook.noteExists('Bye 2092-06-22');
+
+        await noteBook.deleteNote('Hello 1992-06-22');
+
+        await noteBook.noteDoesNotExist('Hello 1992-06-22');
         await noteBook.noteExists('Bye 2092-06-22');
     }));
 

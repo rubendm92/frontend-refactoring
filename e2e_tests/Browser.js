@@ -5,12 +5,18 @@ const fill = page => (selector, value) => page.$eval(selector, (el, value) => el
 
 const click = page => selector => page.click(selector);
 
+const hover = page => selector => page.hover(selector);
+
 const elementPresent = page => async selector => {
-    const timeout = 500;
-    try {
-        await page.waitForSelector(selector, {timeout: timeout});
-    } catch (e) {
-        throw new Error(`Element "${selector}" not found after ${timeout} ms`);
+    if (await page.$(selector) === null) {
+        throw new Error(`Element "${selector}" not found`);
+    }
+};
+
+const elementNotPresent = page => async (selector, content) => {
+    const element = await page.$(selector);
+    if (element !== null && content === undefined || element.textContent === content) {
+        throw new Error(`Element "${selector}" found`);
     }
 };
 
@@ -32,7 +38,9 @@ module.exports = url => fn => (async () => {
         await fn({
             fill: fill(page),
             click: click(page),
+            hover: hover(page),
             elementPresent: elementPresent(page),
+            elementNotPresent: elementNotPresent(page),
             elementHasText: elementHasText(page),
             refresh: page.reload.bind(page)
         });

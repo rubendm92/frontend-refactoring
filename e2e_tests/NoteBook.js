@@ -9,9 +9,19 @@ class NoteBook {
         await this._page.click('input[type="submit"]');
     };
 
+    async deleteNote(content) {
+        // Deletes the first note since picking the right one seems difficult now
+        await this._page.hover('li');
+        await this._page.click('li > button');
+    };
+
     async noteExists(content) {
         await this._page.elementPresent('li');
         await this._page.elementHasText('li > p', content);
+    };
+
+    async noteDoesNotExist(content) {
+        await this._page.elementNotPresent('li', content);
     };
 
     async refresh() {

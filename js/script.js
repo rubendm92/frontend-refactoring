@@ -1,12 +1,22 @@
+const getNotes = () => {
+    return localStorage.notes ? JSON.parse(localStorage.notes).map(({text, date}) => new Note(text, date)) : [];
+};
+
+const storeNote = note => {
+    const notes = [...getNotes(), note];
+    localStorage.notes = JSON.stringify(notes.map(n => n.toJson()));
+};
+
+const removeNote = note => {
+    localStorage.notes = JSON.stringify(getNotes().filter(n => !n.equals(note)));
+};
+
 function load_notes() {
-    if (localStorage.notes === undefined ) return;
-    JSON.parse(localStorage.notes).map(({text, date}) => new Note(text, date)).forEach(show_note);
+    getNotes().forEach(show_note);
 }
 
 function add_note(note) {
-    var notes = localStorage.notes ? JSON.parse(localStorage.notes).map(({text, date}) => new Note(text, date)) : [];
-    notes.push(note);
-    localStorage.notes = JSON.stringify(notes.map(n => n.toJson()));
+    storeNote(note);
     show_note(note);
 }
 
@@ -25,15 +35,9 @@ function deleteButton(note) {
     button.textContent = 'Borrar';
     button.addEventListener('click', () => {
         button.parentElement.remove();
-        remove_note(note);
+        removeNote(note);
     });
     return button;
-}
-
-function remove_note(note_to_remove) {
-    const notes = JSON.parse(localStorage.notes)
-        .filter(note => !note.equals(note_to_remove));
-    localStorage.notes = JSON.stringify(notes);
 }
 
 load_notes();

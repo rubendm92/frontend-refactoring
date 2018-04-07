@@ -24,17 +24,23 @@ function new_note() {
 }
 
 function show_note(note) {
-    $('#notes')
-        .append($('<li>')
-            .append('<p>' + note.text + " " + note.date + '</p>')
-            .append(delete_button(note)));
+    const notes = document.getElementById('notes');
+    const noteElement = document.createElement('li');
+    const content = document.createElement('p');
+    content.textContent = `${note.text} ${note.date}`;
+    noteElement.appendChild(content);
+    noteElement.appendChild(deleteButton(note));
+    notes.appendChild(noteElement);
 }
 
-function delete_button(note) {
-    return $('<button>').on('click', function() {
-        $(this).parent().remove();
+function deleteButton(note) {
+    const button = document.createElement('button');
+    button.textContent = 'Borrar';
+    button.addEventListener('click', () => {
+        button.parentElement.remove();
         remove_note(note);
-    }).append("Borrar");
+    });
+    return button;
 }
 
 function remove_note(note_to_remove) {

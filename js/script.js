@@ -12,32 +12,12 @@ const removeNote = note => {
 };
 
 function load_notes() {
-    getNotes().forEach(show_note);
+    getNotes().forEach(showNote);
 }
 
 function add_note(note) {
     storeNote(note);
-    show_note(note);
-}
-
-function show_note(note) {
-    const notes = document.getElementById('notes');
-    const noteElement = document.createElement('li');
-    const content = document.createElement('p');
-    content.textContent = note.toString();
-    noteElement.appendChild(content);
-    noteElement.appendChild(deleteButton(note));
-    notes.appendChild(noteElement);
-}
-
-function deleteButton(note) {
-    const button = document.createElement('button');
-    button.textContent = 'Borrar';
-    button.addEventListener('click', () => {
-        button.parentElement.remove();
-        removeNote(note);
-    });
-    return button;
+    showNote(note, removeNote);
 }
 
 load_notes();

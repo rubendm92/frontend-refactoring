@@ -8,11 +8,11 @@ const storeNote = note => {
 };
 
 const removeNote = note => {
-    localStorage.notes = JSON.stringify(getNotes().filter(n => !n.equals(note)));
+    localStorage.notes = JSON.stringify(getNotes().filter(n => !n.equals(note)).map(n => n.toJson()));
 };
 
 function load_notes() {
-    getNotes().forEach(showNote);
+    getNotes().forEach(n => showNote(n, removeNote));
 }
 
 function add_note(note) {

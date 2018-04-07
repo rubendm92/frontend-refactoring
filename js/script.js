@@ -1,20 +1,39 @@
+class Note {
+    constructor(text, date) {
+        this._text = text;
+        this._date = date;
+    }
+
+    get text() {
+        return this._text;
+    }
+
+    get date() {
+        return this._date;
+    }
+
+    equals(note) {
+        return this.text === note.text && this.date === note.date;
+    }
+}
+
 function load_notes() {
     if (localStorage.notes === undefined ) return;
     JSON.parse(localStorage.notes).forEach(show_note);
 }
 
 function add_note(note) {
-    var notes = localStorage.notes === undefined ? [] : JSON.parse(localStorage.notes);
+    var notes = localStorage.notes ? JSON.parse(localStorage.notes).map(n => new Note(n.text, n.date)) : [];
     notes.push(note);
-    localStorage.notes = JSON.stringify(notes);
+    localStorage.notes = JSON.stringify(notes.map(n => { return {text: n.text, date: n.date}; }));
     show_note(note);
 }
 
 function createNote() {
-    return {
-        'text': document.getElementById('note_input').value,
-        'date': document.getElementById('date_input').value
-    };
+    return new Note(
+        document.getElementById('note_input').value,
+        document.getElementById('date_input').value
+    );
 }
 
 function show_note(note) {
@@ -39,12 +58,8 @@ function deleteButton(note) {
 
 function remove_note(note_to_remove) {
     const notes = JSON.parse(localStorage.notes)
-        .filter(note => !notes_are_equals(note, note_to_remove));
+        .filter(note => !note.equals(note_to_remove));
     localStorage.notes = JSON.stringify(notes);
-}
-
-function notes_are_equals(note1, note2) {
-    return note1.text === note2.text && note1.date === note2.date;
 }
 
 load_notes();

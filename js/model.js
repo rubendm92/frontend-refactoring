@@ -4,16 +4,12 @@ class Note {
         this._date = date;
     }
 
-    get text() {
-        return this._text;
-    }
-
-    get date() {
-        return this._date;
-    }
-
     equals(note) {
-        return this.text === note.text && this.date === note.date;
+        return this._text === note._text && this._date === note._date;
+    }
+
+    toString() {
+        return `${this._text} ${this._date}`;
     }
 
     toJson() {

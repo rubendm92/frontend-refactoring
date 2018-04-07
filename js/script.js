@@ -1,6 +1,6 @@
 function load_notes() {
     if (localStorage.notes === undefined ) return;
-    JSON.parse(localStorage.notes).forEach(show_note);
+    JSON.parse(localStorage.notes).map(({text, date}) => new Note(text, date)).forEach(show_note);
 }
 
 function add_note(note) {
@@ -14,7 +14,7 @@ function show_note(note) {
     const notes = document.getElementById('notes');
     const noteElement = document.createElement('li');
     const content = document.createElement('p');
-    content.textContent = `${note.text} ${note.date}`;
+    content.textContent = note.toString();
     noteElement.appendChild(content);
     noteElement.appendChild(deleteButton(note));
     notes.appendChild(noteElement);

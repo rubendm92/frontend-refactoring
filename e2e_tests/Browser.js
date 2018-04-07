@@ -15,7 +15,6 @@ const elementPresent = page => async selector => {
 };
 
 const elementHasText = page => async (selector, expectedText) => {
-    elementPresent(page)(selector);
     const actualText = await page.evaluate(selector => document.querySelector(selector).textContent, selector);
     expect(expectedText).to.equal(actualText);
 };
@@ -31,7 +30,8 @@ module.exports = url => fn => (async () => {
             fill: fill(page),
             click: click(page),
             elementPresent: elementPresent(page),
-            elementHasText: elementHasText(page)
+            elementHasText: elementHasText(page),
+            refresh: page.reload.bind(page)
         });
     } finally {
         await browser.close();

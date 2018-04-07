@@ -13,6 +13,10 @@ class NoteBook {
         await this._page.elementPresent('li');
         await this._page.elementHasText('li > p', content);
     };
+
+    async refresh() {
+        await this._page.refresh();
+    }
 }
 
 module.exports = NoteBook;

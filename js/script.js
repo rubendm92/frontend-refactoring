@@ -18,8 +18,8 @@ function add_note(note) {
 
 function new_note() {
     return {
-        'text': $('#note_input').val(),
-        'date': $('#date_input').val()
+        'text': document.getElementById('note_input').value,
+        'date': document.getElementById('date_input').value
     };
 }
 

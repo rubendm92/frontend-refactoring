@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const expect = require('chai').expect;
 
-const fill = page => (selector, value) => page.type(selector, value);
+const fill = page => (selector, value) => page.$eval(selector, (el, value) => el.value = value, value);
 
 const click = page => selector => page.click(selector);
 
@@ -15,8 +15,11 @@ const elementPresent = page => async selector => {
 };
 
 const elementHasText = page => async (selector, expectedText) => {
-    const actualText = await page.evaluate(selector => document.querySelector(selector).textContent, selector);
-    expect(expectedText).to.equal(actualText);
+    const actualText = await page.evaluate((selector, expectedText) => {
+        const elements = [...document.querySelectorAll(selector)];
+        return elements.find(el => el.textContent === expectedText) ? expectedText : elements[0].textContent;
+    }, selector, expectedText);
+    expect(actualText).to.equal(expectedText);
 };
 
 module.exports = url => fn => (async () => {

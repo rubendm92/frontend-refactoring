@@ -13,17 +13,25 @@ describe('Notes', function() {
     });
 
     it('can create a note with a text and a date', _(async noteBook => {
-        await noteBook.publishNote('Hello', '22/06/1992');
+        await noteBook.publishNote('Hello', '1992-06-22');
         await noteBook.noteExists('Hello 1992-06-22');
     }));
 
     it('notes are stored, so they are present after reload', _(async noteBook => {
-        await noteBook.publishNote('Hello', '22/06/1992');
+        await noteBook.publishNote('Hello', '1992-06-22');
         await noteBook.noteExists('Hello 1992-06-22');
 
         await noteBook.refresh();
 
         await noteBook.noteExists('Hello 1992-06-22');
+    }));
+
+    it('can create multiple notes', _(async noteBook => {
+        await noteBook.publishNote('Hello', '1992-06-22');
+        await noteBook.publishNote('Bye', '2092-06-22');
+
+        await noteBook.noteExists('Hello 1992-06-22');
+        await noteBook.noteExists('Bye 2092-06-22');
     }));
 
     after(() => server.stop());

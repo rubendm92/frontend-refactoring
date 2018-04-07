@@ -44,12 +44,8 @@ function deleteButton(note) {
 }
 
 function remove_note(note_to_remove) {
-    var notes = JSON.parse(localStorage.notes);
-    for (var i = 0; i < notes.length; i++) {
-        if (!(notes_are_equals(notes[i], note_to_remove))) continue;
-        notes.splice(i, 1);
-        break;
-    }
+    const notes = JSON.parse(localStorage.notes)
+        .filter(note => !notes_are_equals(note, note_to_remove));
     localStorage.notes = JSON.stringify(notes);
 }
 

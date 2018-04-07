@@ -4,7 +4,7 @@ function load_notes() {
 }
 
 function add_note(note) {
-    var notes = localStorage.notes ? JSON.parse(localStorage.notes).map(n => new Note(n.text, n.date)) : [];
+    var notes = localStorage.notes ? JSON.parse(localStorage.notes).map(({text, date}) => new Note(text, date)) : [];
     notes.push(note);
     localStorage.notes = JSON.stringify(notes.map(n => n.toJson()));
     show_note(note);

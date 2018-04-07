@@ -1,7 +1,3 @@
-$(document).ready(function() {
-    load_notes();
-});
-
 function load_notes() {
     if (localStorage.notes === undefined ) return;
     JSON.parse(localStorage.notes).forEach(show_note);
@@ -54,3 +50,5 @@ function remove_note(note_to_remove) {
 function notes_are_equals(note1, note2) {
     return note1.text === note2.text && note1.date === note2.date;
 }
+
+load_notes();

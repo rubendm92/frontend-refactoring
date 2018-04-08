@@ -1,20 +1,13 @@
 export default storage => {
-    const get = () => {
-        return storage.notes ? JSON.parse(storage.notes) : [];
-    };
+    const get = () => storage.notes ? JSON.parse(storage.notes) : [];
 
-    const add = note => {
-        const notes = [...get(), note];
-        storage.notes = JSON.stringify(notes);
-    };
+    const add = note => storage.notes = JSON.stringify([...get(), note]);
 
     const remove = note => {
-        localStorage.notes = JSON.stringify(get().filter(n => !equals(n, note)));
+        storage.notes = JSON.stringify(get().filter(n => !equals(n, note)));
     };
 
-    const equals = (l, r) => {
-        return l.text === r.text && l.date === r.date;
-    };
+    const equals = (l, r) => l.text === r.text && l.date === r.date;
 
     return { get, add, remove };
 };

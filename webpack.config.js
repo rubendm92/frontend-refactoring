@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        app: './js/script.js',
+        app: './js/main.js',
         test: './tests/integration/trick.js'
     },
     output: {

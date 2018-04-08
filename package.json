@@ -6,16 +6,12 @@
   "scripts": {
     "build": "$(npm bin)/webpack",
     "start": "npm run build && $(npm bin)/serve -p 8000",
-    "test_unit": "$(npm bin)/mocha --require babel-register tests/unit",
+    "test_unit": "$(npm bin)/mocha -r babel-register tests/unit",
     "test_integration": "npm run build && $(npm bin)/mocha -r babel-polyfill -r babel-register -r jsdom-global/register tests/integration",
     "test_e2e": "npm run build && $(npm bin)/mocha tests/e2e",
     "test": "npm run test_unit && npm run test_integration && npm run test_e2e"
   },
-  "babel": {
-    "presets": [
-      "env"
-    ]
-  },
+  "babel": { "presets": [ "env" ] },
   "author": "",
   "license": "ISC",
   "devDependencies": {

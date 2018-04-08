@@ -1,46 +1,43 @@
-const expect = require('chai').expect;
+const { spy, assert } = require('sinon');
 const {addNote} = require('../../js/actions');
 
 describe('Actions', () => {
 
     describe('Add note', () => {
 
-        let repository;
+        let repository, reload;
 
         beforeEach(() => {
-            repository = (() => {
-                const notes = [];
-                return {
-                    add: notes.push.bind(notes),
-                    get: () => notes
-                }
-            })();
+            repository = { add: spy(), get: spy() };
+            reload = spy();
         });
 
-        it('should add note to the repository', function () {
-            const f = addNote(repository);
+        it('should add a note', function () {
+            const f = addNote(repository, reload);
 
             f({text: 'hello', date: '1992-06-22'});
 
-            expect(repository.get()).to.deep.equal([
-                {text: 'hello', date: '1992-06-22'}
-            ]);
+            assert.calledWith(repository.add, {text: 'hello', date: '1992-06-22'});
+            assert.called(repository.get);
+            assert.called(reload);
         });
 
         it('should not add a note without text', function () {
-            const f = addNote(repository);
+            const f = addNote(repository, reload);
 
             f({text: '', date: '1992-06-22'});
 
-            expect(repository.get()).to.be.empty;
+            assert.notCalled(repository.add);
+            assert.notCalled(reload);
         });
 
         it('should not add a note without date', function () {
-            const f = addNote(repository);
+            const f = addNote(repository, reload);
 
             f({text: 'hello'});
 
-            expect(repository.get()).to.be.empty;
+            assert.notCalled(repository.add);
+            assert.notCalled(reload);
         });
     });
 });

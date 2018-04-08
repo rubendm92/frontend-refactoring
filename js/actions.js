@@ -5,4 +5,9 @@ const addNote = (repository, reload) => note => {
     }
 };
 
-module.exports = { addNote };
+const removeNote = (repository, reload) => note => {
+    repository.remove(note);
+    reload(repository.get());
+};
+
+module.exports = { addNote, removeNote };

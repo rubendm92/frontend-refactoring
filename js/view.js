@@ -20,16 +20,18 @@ const showNote = note => {
     notes.appendChild(noteElement);
 };
 
+const createEvent = (name, detail) => new CustomEvent(name, {bubbles: true, detail});
+
 const deleteButton = note => {
     const button = document.createElement('button');
     button.textContent = 'Borrar';
     button.addEventListener('click', () => {
-        button.dispatchEvent(new CustomEvent('remove-note', { bubbles: true, detail: { note: note }}));
+        button.dispatchEvent(createEvent('remove-note', { note }));
     });
     return button;
 };
 
 document.querySelector('form').addEventListener('submit', e => {
     e.preventDefault();
-    document.body.dispatchEvent(new CustomEvent('add-note', { bubbles: true, detail: { note: retrieveInput() } }));
+    document.body.dispatchEvent(createEvent('add-note', { note: retrieveInput() }));
 });

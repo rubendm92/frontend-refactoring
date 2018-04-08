@@ -23,9 +23,6 @@ const showNote = (note, removeNote) => {
 const deleteButton = (note, removeNote) => {
     const button = document.createElement('button');
     button.textContent = 'Borrar';
-    button.addEventListener('click', () => {
-        button.parentElement.remove();
-        removeNote(note);
-    });
+    button.addEventListener('click', () => removeNote(note));
     return button;
 };

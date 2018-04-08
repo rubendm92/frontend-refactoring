@@ -35,3 +35,6 @@ document.querySelector('form').addEventListener('submit', e => {
     e.preventDefault();
     document.body.dispatchEvent(createEvent('add-note', { note: retrieveInput() }));
 });
+
+const onAddNote = f => document.body.addEventListener('add-note', e => f(e.detail.note));
+const onRemoveNote = f => document.body.addEventListener('remove-note', e => f(e.detail.note));

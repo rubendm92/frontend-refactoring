@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha test && ./node_modules/.bin/mocha e2e_tests"
+    "test": "$(npm bin)/mocha tests/unit && $(npm bin)/mocha tests/e2e"
   },
   "author": "",
   "license": "ISC",

@@ -1,5 +1,5 @@
 const serve = require('serve');
-const browser = require('./Browser');
+const browser = require('../lib/Browser');
 const NoteBook = require('./NoteBook');
 const port = 8000;
 const _ = f => browser(`http://localhost:${port}`)(page => f(new NoteBook(page)));

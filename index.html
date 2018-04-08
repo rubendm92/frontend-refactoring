@@ -6,8 +6,14 @@
 </head>
 <body>
 <form>
-    Nota: <input id="note_input" type="text" placeholder="Nota"/>
-    Fecha: <input id="date_input" type="date"/>
+    <fieldset>
+        <label for="note_input">Nota</label>
+        <input id="note_input" type="text" placeholder="Nota"/>
+    </fieldset>
+    <fieldset>
+        <label for="date_input">Fecha</label>
+        <input id="date_input" type="date"/>
+    </fieldset>
     <input type="submit" value="Guardar"/>
 </form>
 <ul id="notes"></ul>

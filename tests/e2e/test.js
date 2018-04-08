@@ -17,15 +17,6 @@ describe('Notes', function() {
         await noteBook.noteExists('Hello 1992-06-22');
     }));
 
-    it('notes are stored, so they are present after reload', _(async noteBook => {
-        await noteBook.publishNote('Hello', '1992-06-22');
-        await noteBook.noteExists('Hello 1992-06-22');
-
-        await noteBook.refresh();
-
-        await noteBook.noteExists('Hello 1992-06-22');
-    }));
-
     it('can create multiple notes', _(async noteBook => {
         await noteBook.publishNote('Hello', '1992-06-22');
         await noteBook.publishNote('Bye', '2092-06-22');
@@ -45,6 +36,21 @@ describe('Notes', function() {
 
         await noteBook.noteDoesNotExist('Hello 1992-06-22');
         await noteBook.noteExists('Bye 2092-06-22');
+    }));
+
+    it('notes are stored, so they are present after reload', _(async noteBook => {
+        await noteBook.publishNote('Hello', '1992-06-22');
+        await noteBook.noteExists('Hello 1992-06-22');
+
+        await noteBook.refresh();
+
+        await noteBook.noteExists('Hello 1992-06-22');
+
+        await noteBook.deleteNote('Hello 1992-06-22');
+
+        await noteBook.refresh();
+
+        await noteBook.noteDoesNotExist('Hello 1992-06-22');
     }));
 
     after(() => server.stop());

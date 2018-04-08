@@ -5,6 +5,11 @@ const retrieveInput = () => {
     };
 };
 
+const showNotes = (notes, removeNote) => {
+    document.getElementById('notes').innerHTML = '';
+    notes.forEach(n => showNote(n, removeNote));
+};
+
 const showNote = (note, removeNote) => {
     const notes = document.getElementById('notes');
     const noteElement = document.createElement('li');

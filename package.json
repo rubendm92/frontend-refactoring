@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "$(npm bin)/serve -p 8000",
     "test": "$(npm bin)/mocha tests/unit && $(npm bin)/mocha tests/integration && $(npm bin)/mocha tests/e2e"
   },
   "author": "",

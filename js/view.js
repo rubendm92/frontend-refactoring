@@ -5,8 +5,15 @@ const retrieveInput = () => {
     };
 };
 
+const clearNotes = () => {
+    const notes = document.getElementById('notes');
+    while (notes.firstChild) {
+        notes.removeChild(notes.firstChild);
+    }
+};
+
 const showNotes = notes => {
-    document.getElementById('notes').innerHTML = '';
+    clearNotes();
     notes.forEach(showNote);
 };
 

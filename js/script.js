@@ -11,21 +11,21 @@ const removeNote = note => {
     localStorage.notes = JSON.stringify(getNotes().filter(n => !n.equals(note)).map(n => n.toJson()));
 };
 
-function load_notes() {
+function loadNotes() {
     getNotes().forEach(n => showNote(n, removeNote));
 }
 
-function add_note(note) {
+function addNote(note) {
     storeNote(note);
     showNote(note, removeNote);
 }
 
-load_notes();
+loadNotes();
 
 document.querySelector('form').addEventListener('submit', e => {
     e.preventDefault();
     const {text, date} = retrieveInput();
     if (!(text === '' || date === '')) {
-        add_note(new Note(text, date));
+        addNote(new Note(text, date));
     }
 });

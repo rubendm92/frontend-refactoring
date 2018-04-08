@@ -9,7 +9,7 @@ const showNote = (note, removeNote) => {
     const notes = document.getElementById('notes');
     const noteElement = document.createElement('li');
     const content = document.createElement('p');
-    content.textContent = note.toString();
+    content.textContent = `${note.text} ${note.date}`;
     noteElement.appendChild(content);
     noteElement.appendChild(deleteButton(note, removeNote));
     notes.appendChild(noteElement);

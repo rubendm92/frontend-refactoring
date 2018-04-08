@@ -1,14 +1,18 @@
 const getNotes = () => {
-    return localStorage.notes ? JSON.parse(localStorage.notes).map(({text, date}) => new Note(text, date)) : [];
+    return localStorage.notes ? JSON.parse(localStorage.notes) : [];
 };
 
 const storeNote = note => {
     const notes = [...getNotes(), note];
-    localStorage.notes = JSON.stringify(notes.map(n => n.toJson()));
+    localStorage.notes = JSON.stringify(notes);
 };
 
 const removeNote = note => {
-    localStorage.notes = JSON.stringify(getNotes().filter(n => !n.equals(note)).map(n => n.toJson()));
+    localStorage.notes = JSON.stringify(getNotes().filter(n => !equals(n, note)));
+};
+
+const equals = (l, r) => {
+    return l.text === r.text && l.date === r.date;
 };
 
 function loadNotes() {
@@ -26,6 +30,6 @@ document.querySelector('form').addEventListener('submit', e => {
     e.preventDefault();
     const {text, date} = retrieveInput();
     if (!(text === '' || date === '')) {
-        addNote(new Note(text, date));
+        addNote({text, date});
     }
 });

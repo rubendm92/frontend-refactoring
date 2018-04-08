@@ -31,7 +31,7 @@ const deleteButton = note => {
     const button = document.createElement('button');
     button.textContent = 'Borrar';
     button.addEventListener('click', () => {
-        button.dispatchEvent(new CustomEvent('remove-note', {detail: { note }}));
+        button.dispatchEvent(new CustomEvent('remove-note', {bubbles: true, detail: { note }}));
     });
     return button;
 };

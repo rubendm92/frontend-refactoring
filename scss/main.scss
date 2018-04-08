@@ -24,35 +24,35 @@ ul {
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
     transition: all 0.5s ease-in;
     overflow: hidden;
-  }
 
-  &:nth-child(even) {
-    transform: rotate(2deg);
-  }
+    &:nth-child(even) {
+      transform: rotate(2deg);
+    }
 
-  &:nth-child(odd) {
-    transform: rotate(-1deg);
-  }
+    &:nth-child(odd) {
+      transform: rotate(-1deg);
+    }
 
-  &:nth-child(3n) {
-    transform: rotate(1deg);
-  }
+    &:nth-child(3n) {
+      transform: rotate(1deg);
+    }
 
-  &:hover {
-    box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.4);
-    transform: rotate(0deg) scale(1.25);
-    z-index: 10;
-  }
+    &:hover {
+      box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.4);
+      transform: rotate(0deg) scale(1.25);
+      z-index: 10;
+    }
 
-  & Button {
-    border: 1px solid black;
-    display: none;
-    margin-left: auto;
-    margin-top: 80%;
-    background-color: #AEAF93;
-  }
+    & Button {
+      border: 1px solid black;
+      display: none;
+      margin-left: auto;
+      margin-top: 80%;
+      background-color: #AEAF93;
+    }
 
-  &:hover Button {
-    display: block;
+    &:hover Button {
+      display: block;
+    }
   }
 }

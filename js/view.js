@@ -45,3 +45,5 @@ document.querySelector('form').addEventListener('submit', e => {
 
 const onAddNote = f => document.body.addEventListener('add-note', e => f(e.detail.note));
 const onRemoveNote = f => document.body.addEventListener('remove-note', e => f(e.detail.note));
+
+export { onAddNote, onRemoveNote, showNotes }

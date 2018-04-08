@@ -1,4 +1,4 @@
-const repository = (storage => {
+export default storage => {
     const get = () => {
         return storage.notes ? JSON.parse(storage.notes) : [];
     };
@@ -17,6 +17,4 @@ const repository = (storage => {
     };
 
     return { get, add, remove };
-});
-
-module.exports = { repository };
+};

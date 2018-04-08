@@ -1,5 +1,5 @@
 import { spy, assert } from 'sinon';
-import {addNote, removeNote} from '../../js/actions';
+import { addNote, removeNote } from '../../js/actions';
 
 describe('Actions', () => {
 

@@ -3,9 +3,9 @@ const expect = require('chai').expect;
 
 const fill = page => (selector, value) => page.$eval(selector, (el, value) => el.value = value, value);
 
-const click = page => selector => page.click(selector);
+const click = page => page.click.bind(page);
 
-const hover = page => selector => page.hover(selector);
+const hover = page => page.hover.bind(page);
 
 const elementPresent = page => async selector => {
     if (await page.$(selector) === null) {
@@ -28,7 +28,7 @@ const elementHasText = page => async (selector, expectedText) => {
     expect(actualText).to.equal(expectedText);
 };
 
-const execute = page => f => page.evaluate(f);
+const execute = page => page.evaluate.bind(page);
 
 module.exports = url => fn => (async () => {
     const browser = await puppeteer.launch();

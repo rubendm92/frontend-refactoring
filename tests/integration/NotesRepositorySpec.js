@@ -1,9 +1,8 @@
 import serve from 'serve';
 import browser from '../lib/Browser';
 import { expect } from 'chai';
-const { repository } = require('../../js/persistence');
 const port = 8000;
-const _ = f => browser(`http://localhost:${port}`)(page => f(page));
+const _ = f => browser(`http://localhost:${port}/tests/integration/fixture.html`)(page => f(page));
 
 let server;
 
@@ -25,7 +24,6 @@ describe('Repository', function() {
         expect(notes).to.deep.equal([
             {text: 'Hello', date: '1992-06-22'},
             {text: 'Bye', date: '2092-06-22'}
-
         ]);
 
         await page.execute(() => repository(localStorage).remove({text: 'Hello', date: '1992-06-22'}));

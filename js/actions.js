@@ -10,4 +10,4 @@ const removeNote = (repository, reload) => note => {
     reload(repository.get());
 };
 
-module.exports = { addNote, removeNote };
+export { addNote, removeNote };

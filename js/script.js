@@ -1,3 +1,7 @@
+import { addNote, removeNote } from './actions';
+import repository from './persistence';
+import { onAddNote, onRemoveNote, showNotes } from './view';
+
 (repository => {
     showNotes(repository.get());
     onAddNote(addNote(repository, showNotes));

@@ -28,6 +28,8 @@ const elementHasText = page => async (selector, expectedText) => {
     expect(actualText).to.equal(expectedText);
 };
 
+const execute = page => f => page.evaluate(f);
+
 module.exports = url => fn => (async () => {
     const browser = await puppeteer.launch();
 
@@ -42,6 +44,7 @@ module.exports = url => fn => (async () => {
             elementPresent: elementPresent(page),
             elementNotPresent: elementNotPresent(page),
             elementHasText: elementHasText(page),
+            execute: execute(page),
             refresh: page.reload.bind(page)
         });
     } finally {

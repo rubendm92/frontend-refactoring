@@ -1,5 +1,5 @@
-const { spy, assert } = require('sinon');
-const {addNote, removeNote} = require('../../js/actions');
+import { spy, assert } from 'sinon';
+import {addNote, removeNote} from '../../js/actions';
 
 describe('Actions', () => {
 

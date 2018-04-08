@@ -1,6 +1,6 @@
-const serve = require('serve');
-const browser = require('../lib/Browser');
-const { expect } = require('chai');
+import serve from 'serve';
+import browser from '../lib/Browser';
+import { expect } from 'chai';
 const { repository } = require('../../js/persistence');
 const port = 8000;
 const _ = f => browser(`http://localhost:${port}`)(page => f(page));

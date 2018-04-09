@@ -16,8 +16,12 @@
       "env"
     ]
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Rubén Díaz Martínez <rubendm92@gmail.com>",
+  "license": "Apache License, Version 2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rubendm92/frontend-refactoring.git"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.4",

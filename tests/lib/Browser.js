@@ -11,7 +11,7 @@ const elementPresent = page => async selector => {
 
 const elementNotPresent = page => async (selector, content) => {
     const element = await page.$(selector);
-    if (element !== null && content === undefined || element.textContent === content) {
+    if (element && (content === undefined || element.textContent === content)) {
         throw new Error(`Element "${selector}" found`);
     }
 };

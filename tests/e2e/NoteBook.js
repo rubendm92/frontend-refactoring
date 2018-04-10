@@ -11,17 +11,17 @@ class NoteBook {
 
     async deleteNote(content) {
         // Deletes the first note since picking the right one seems difficult now
-        await this._page.hover('li');
-        await this._page.click('li > button');
+        await this._page.hover('note-element');
+        await this._page.click('note-element > button');
     };
 
     async noteExists(content) {
-        await this._page.elementPresent('li');
-        await this._page.elementHasText('li > p', content);
+        await this._page.elementPresent('note-element');
+        await this._page.elementHasText('note-element > p', content);
     };
 
     async noteDoesNotExist(content) {
-        await this._page.elementNotPresent('li', content);
+        await this._page.elementNotPresent('note-element', content);
     };
 
     async refresh() {

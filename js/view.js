@@ -20,20 +20,11 @@ const showNotes = notes => {
 const showNote = note => {
     const notes = document.getElementById('notes');
     const noteElement = document.createElement('li');
-    const content = document.createElement('p');
-    content.textContent = `${note.text} ${note.date}`;
+    const content = document.createElement('note-element');
+    content.setAttribute('content', `${note.text} ${note.date}`);
+    content.addEventListener('remove-note', () => content.dispatchEvent(new CustomEvent('remove-note', {bubbles: true, detail: { note }})));
     noteElement.appendChild(content);
-    noteElement.appendChild(deleteButton(note));
     notes.appendChild(noteElement);
-};
-
-const deleteButton = note => {
-    const button = document.createElement('button');
-    button.textContent = 'Borrar';
-    button.addEventListener('click', () => {
-        button.dispatchEvent(new CustomEvent('remove-note', {bubbles: true, detail: { note }}));
-    });
-    return button;
 };
 
 const onAddNote = f => document.querySelector('form').addEventListener('submit', e => {

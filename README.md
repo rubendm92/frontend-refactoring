@@ -14,6 +14,7 @@ Here are some _key_ commits:
 - [Code split in multiple files, unit and integration tests added](https://github.com/rubendm92/frontend-refactoring/commit/9353971dd35d34363bc2686de4dc6c5eade5a105)
 - [Using Webpack and Babel to support ES6 modules](https://github.com/rubendm92/frontend-refactoring/commit/9f9639ef401f5b697b81a80c0a222cf2f5666de6)
 - [Using SASS instead of CSS](https://github.com/rubendm92/frontend-refactoring/commit/acae680d50cf4320aaca4b308d08da57fb29ff6f)
+- [Custom element for the notes](https://github.com/rubendm92/frontend-refactoring/commit/a5d6143fe65a750814d366b13824dcc66defca02)
 
 ![But why?](https://media.giphy.com/media/1M9fmo1WAFVK0/giphy.gif "But why?")
 
@@ -29,8 +30,12 @@ I wanted to use ES6 and for using it while running tests with mocha I had to inc
 
 ## Why Webpack
 
-To be able to use ES6 modules.
+To be able to use ES6 modules. As I read, you can bundle all your javascript in just one file only with Babel, but if you are using ES6 modules the code doesn't work.
 
 ## Why SASS
 
 Just to be cool :D Just to give it a try at doing some configuration with Webpack. Doing this I found that right now at work we are using Webpack 3 and at this repo I'm using Webpack 4, which breaks with ExtractTextPlugin, a plugin that allows you to generate the css from the sass as a separate file. Due to the broken plugin, right now the styles are generated in Javascript, which (I think) inserts the style in the HTML on run.
+
+## Why Custom Elements
+
+I worked with [Polymer](https://www.polymer-project.org/) some years ago and I liked having your own elements in the HTML instead of just a bunch of _divs_ and _spans_. Using a custom element is kind of easy. What I was not able to do was using a shadow dom because (I think) Puppeteer is not able to find the elements once they are hidden behind a shadow dom. Maybe I have to experiment more :)
